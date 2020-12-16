@@ -1,0 +1,37 @@
+#!/bin/zsh
+
+
+_go_to_kafka_dir()
+{
+cd ~/Library/Kafka
+}
+
+
+start_kafka()
+{
+_go_to_kafka_dir
+bin/kafka-server-start.sh config/server.properties
+cd ~
+}
+
+start_zookeeper()
+{
+_go_to_kafka_dir
+bin/zookeeper-server-start.sh config/zookeeper.properties
+cd ~
+}
+
+produce_messages()
+{
+_go_to_kafka_dir
+bin/kafka-console-producer.sh --topic first-topic --broker-list localhost:9093
+cd ~
+}
+
+consume_messages()
+{
+_go_to_kafka_dir
+bin/kafka-console-consumer.sh --topic first-topic --bootstrap-server localhost:9092 --from-beginning
+cd ~
+}
+
