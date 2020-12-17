@@ -1,37 +1,37 @@
 #!/bin/zsh
 
-
 _go_to_kafka_dir()
 {
+original_directory=$(pwd);
+[ ! -d "$HOME/Library/Kafka" ] && echo "ERROR: Could not find ~/Library/Kafka" && exit;
+# shellcheck disable=SC2164
 cd ~/Library/Kafka
 }
-
 
 start_kafka()
 {
 _go_to_kafka_dir
 bin/kafka-server-start.sh config/server.properties
-cd ~
+cd "$original_directory" || exit
 }
 
 start_zookeeper()
 {
 _go_to_kafka_dir
 bin/zookeeper-server-start.sh config/zookeeper.properties
-cd ~
+cd "$original_directory" || exit
 }
 
 produce_messages()
 {
 _go_to_kafka_dir
 bin/kafka-console-producer.sh --topic first-topic --broker-list localhost:9093
-cd ~
+cd "$original_directory" || exit
 }
 
 consume_messages()
 {
 _go_to_kafka_dir
 bin/kafka-console-consumer.sh --topic first-topic --bootstrap-server localhost:9092 --from-beginning
-cd ~
+cd "$original_directory" || exit
 }
-
