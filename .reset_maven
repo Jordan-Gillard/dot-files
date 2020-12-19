@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+remove_local_maven_repository()
+{
+  [ ! -d "$HOME/.m2" ] && echo "$HOME.m2 directory does not exist. Taking no action.";
+  echo "Found $HOME/.m2 directory. Deleting..."
+  rm -rf ~/.m2
+  echo "$HOME/.m2 directory successfully deleted!"
+}
