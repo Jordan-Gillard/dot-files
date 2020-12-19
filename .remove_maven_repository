@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+remove_maven_repository()
+{
+  [ ! -d "$HOME/.m2" ] && echo "$HOME.m2 directory does not exist. Taking no action.";
+  echo "Found maven repository. Are you sure you want to delete $HOME/.m2 ?" \
+  "Please enter y to delete repository and any other key to cancel."
+  printf "y? "
+  read -r answer
+  if [[ $answer != "y" ]] ; then
+    echo "User input is $answer"
+    printf "Quitting from the program.\n"
+  else
+    rm -rf ~/.m2
+    echo "$HOME/.m2 directory successfully deleted!"
+  fi
+}
